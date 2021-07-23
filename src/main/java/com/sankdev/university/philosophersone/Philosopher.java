@@ -7,8 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Philosopher implements Runnable {
 
     // Forks work as objects for syncing
-    private Object leftFork;
-    private Object rightFork;
+    private final Object leftFork;
+    private final Object rightFork;
 
     public Philosopher(Object leftFork, Object rightFork) {
         this.leftFork = leftFork;
@@ -17,8 +17,8 @@ public class Philosopher implements Runnable {
 
     /**
      * Helper method for simulating action
-     * @param actionName
-     * @throws InterruptedException
+     * @param actionName - name of a simulated activity
+     * @throws InterruptedException - when thread is interrupted
      */
     private void doAction(String actionName) throws InterruptedException {
         System.out.println(Thread.currentThread().getName() + " " + actionName);
@@ -58,11 +58,10 @@ public class Philosopher implements Runnable {
 
                 }
                     doAction(LocalDateTime.now().format(DateTimeFormatter.ISO_TIME) +
-                            " :putting down the left fork. Back to thinking");
+                            " :put down the left fork. Back to thinking");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            return;
         }
     }
 }
