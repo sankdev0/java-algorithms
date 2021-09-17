@@ -7,15 +7,21 @@ package com.sankdev.search;
  */
 public class LinearSearch {
 
-  public static boolean search(int[] array, int target) {
+  /**
+   * Searches target in a sorted or unsorted array.
+   * @param array - sorted or unsorted array.
+   * @param target - target value to search for.
+   * @return - index of target value or -1 if target not found.
+   */
+  public static int search(int[] array, int target) {
 
     for (int i = 0; i < array.length; i++) {
       if (array[i] == target) {
-        return true;
+        return i;
       }
     }
 
-    return false;
+    return -1;
   }
 
 }
