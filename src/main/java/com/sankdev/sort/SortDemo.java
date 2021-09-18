@@ -10,6 +10,7 @@ public class SortDemo {
 
     int[] arrayCopyOne = Arrays.copyOf(array, array.length);
     int[] arrayCopyTwo = Arrays.copyOf(array, array.length);
+    int[] arrayCopyThree = Arrays.copyOf(array, array.length);
 
     System.out.println("Generated array: " + array);
     System.out.println(ArrayUtils.getArrayString(array));
@@ -31,6 +32,20 @@ public class SortDemo {
 
     System.out.println("2. Sorted array with Insertion Sort: " + arrayCopyTwo);
     System.out.println(ArrayUtils.getArrayString(arrayCopyTwo));
+
+    // 3. Use Selection Sort
+    System.out.println("3. Unsorted array: " + arrayCopyThree);
+    System.out.println(ArrayUtils.getArrayString(arrayCopyThree));
+
+    SelectionSort.sort(arrayCopyThree);
+
+    System.out.println("3. Sorted array with Selection Sort: " + arrayCopyThree);
+    System.out.println(ArrayUtils.getArrayString(arrayCopyThree));
+
+    // Check result
+    int arraysTheSame = Arrays.compare(arrayCopyOne, arrayCopyTwo)
+        + Arrays.compare(arrayCopyTwo, arrayCopyThree);
+    System.out.println("Sorted arrays are the same: " + (arraysTheSame == 0 ? "YES." : "FALSE!"));
 
   }
 
