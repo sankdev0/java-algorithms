@@ -2,7 +2,11 @@ package com.sankdev.search;
 
 /**
  * Half the SORTED search array on each iteration and continue searching either half based on
- * checking the middle element. Good: - O(log n) time efficiency. Bad: - only works on sorted data.
+ * checking the middle element.
+ * <p>
+ * Good: O(log n) time efficiency.
+ * <p>
+ * Bad: only works on sorted data.
  */
 public class BinarySearch {
 

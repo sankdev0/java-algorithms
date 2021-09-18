@@ -61,5 +61,11 @@ public class SearchDemo {
     System.out.println("2. Binary search result: target " + target + " "
         + (targetIndex != -1 ? "found at index " + targetIndex + "." : "not found."));
 
+
+    // 3. Use Interpolation Search, the array MUST be sorted.
+    targetIndex = InterpolationSearch.search(array, target);
+
+    System.out.println("3. Interpolation Search result: target " + target + " "
+      + (targetIndex != -1 ? "found at index " + targetIndex + "." : "not found."));
   }
 }
