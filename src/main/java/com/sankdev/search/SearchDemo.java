@@ -1,44 +1,17 @@
 package com.sankdev.search;
 
 import com.sankdev.sort.BubbleSort;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import com.sankdev.util.ArrayUtils;
 
 public class SearchDemo {
 
-  private int[] fillRandomIntArray(int arraySize) {
-
-    Random random = ThreadLocalRandom.current();
-
-    int[] array = new int[arraySize];
-
-    for (int i = 0; i < arraySize; i++) {
-      array[i] = random.nextInt(100);
-    }
-
-    return array;
-  }
-
-  private void printArray(int[] array) {
-    String line = "";
-    for (int i = 0; i < array.length; i++) {
-      line = line.concat(i + " -> " + array[i] + "; ");
-      line.substring(0, line.length() - 1);
-    }
-    System.out.print(line);
-    System.out.println();
-
-  }
-
   public static void main(String[] args) {
-
-    SearchDemo demo = new SearchDemo();
 
     //1. Get arrays ready.
     int arraySize = 100;
-    int[] array = demo.fillRandomIntArray(arraySize);
+    int[] array = ArrayUtils.fillRandomIntArray(arraySize);
     System.out.println("Generated array:");
-    demo.printArray(array);
+    System.out.println(ArrayUtils.getArrayString(array));
 
     int target = 12;
 
@@ -54,7 +27,7 @@ public class SearchDemo {
     BubbleSort.sort(array); // (!) this mutates the array.
 
     System.out.println("Sorted array: ");
-    demo.printArray(array);
+    System.out.println(ArrayUtils.getArrayString(array));
 
     targetIndex = BinarySearch.search(array, target);
 

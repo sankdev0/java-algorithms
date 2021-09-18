@@ -1,32 +1,6 @@
 package com.sankdev.sort;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 public class BubbleSort {
-
-  public static void main(String[] args) {
-    int[] arrayToSort = new int[100];
-
-    fillArray(arrayToSort);
-
-    System.out.println("Array before: " + Arrays.toString(arrayToSort));
-
-    sort(arrayToSort);
-
-    System.out.println("Array after: " + Arrays.toString(arrayToSort));
-
-  }
-
-  public static void fillArray(int[] array) {
-
-    Random random = ThreadLocalRandom.current();
-
-    for (int i = 0; i < 100; i++) {
-      array[i] = random.nextInt(100);
-    }
-  }
 
   public static void sort(int[] array) {
 
@@ -41,6 +15,7 @@ public class BubbleSort {
           array[j] = temp;
         }
       }
+
       if (!swapped) {
         break;
       }
