@@ -1,6 +1,6 @@
 package com.sankdev.search;
 
-import com.sankdev.sort.BubbleSort;
+import com.sankdev.sort.ClassicBubbleSort;
 import com.sankdev.util.ArrayUtils;
 
 public class SearchDemo {
@@ -24,7 +24,7 @@ public class SearchDemo {
 
     // 2. Use Binary Search, but array MUST be sorted.
 
-    BubbleSort.sort(array); // (!) this mutates the array.
+    ClassicBubbleSort.sort(array); // (!) this mutates the array.
 
     System.out.println("Sorted array: ");
     System.out.println(ArrayUtils.getArrayString(array));

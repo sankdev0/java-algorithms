@@ -19,7 +19,7 @@ public class SortDemo {
     System.out.println("1. Unsorted array: " + arrayCopyOne);
     System.out.println(ArrayUtils.getArrayString(arrayCopyOne));
 
-    BubbleSort.sort(arrayCopyOne);
+    ImprovedBubbleSort.sort(arrayCopyOne);
 
     System.out.println("1. Sorted array with Bubble Sort: " + arrayCopyOne);
     System.out.println(ArrayUtils.getArrayString(arrayCopyOne));
