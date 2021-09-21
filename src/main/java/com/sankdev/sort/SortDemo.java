@@ -13,6 +13,7 @@ public class SortDemo {
     int[] arrayCopy3 = Arrays.copyOf(array, array.length);
     int[] arrayCopy4 = Arrays.copyOf(array, array.length);
     int[] arrayCopy5 = Arrays.copyOf(array, array.length);
+    int[] arrayCopy6 = Arrays.copyOf(array, array.length);
 
     System.out.println("Generated array: " + System.identityHashCode(array));
     System.out.println(ArrayUtils.getArrayString(array));
@@ -62,16 +63,28 @@ public class SortDemo {
     System.out.println("5. Unsorted array: " + System.identityHashCode(arrayCopy5));
     System.out.println(ArrayUtils.getArrayString(arrayCopy5));
 
-      QuickSort.sort(arrayCopy5);
+    QuickSort.sort(arrayCopy5);
 
     System.out.println("5. Sorted array with Quick Sort: " + System.identityHashCode(arrayCopy5));
     System.out.println(ArrayUtils.getArrayString(arrayCopy5));
 
+    // 6. Use Merge Sort
+    System.out.println();
+    System.out.println("6. Unsorted array: " + System.identityHashCode(arrayCopy6));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy6));
+
+    MergeSort.sort(arrayCopy6);
+
+    System.out.println("6. Sorted array with Merge Sort: " + System.identityHashCode(arrayCopy6));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy6));
+
     // Check result
+    System.out.println();
     int arraysTheSame = Arrays.compare(arrayCopy1, arrayCopy2)
         + Arrays.compare(arrayCopy2, arrayCopy3)
         + Arrays.compare(arrayCopy3, arrayCopy4)
-        + Arrays.compare(arrayCopy4, arrayCopy5);
+        + Arrays.compare(arrayCopy4, arrayCopy5)
+        + Arrays.compare(arrayCopy5, arrayCopy6);
     System.out.println("Sorted arrays are the same: " + (arraysTheSame == 0 ? "YES." : "FALSE!"));
 
   }
