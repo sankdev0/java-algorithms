@@ -8,54 +8,70 @@ public class SortDemo {
   public static void main(String[] args) {
     int[] array = ArrayUtils.fillRandomIntArray(100);
 
-    int[] arrayCopyOne = Arrays.copyOf(array, array.length);
-    int[] arrayCopyTwo = Arrays.copyOf(array, array.length);
-    int[] arrayCopyThree = Arrays.copyOf(array, array.length);
-    int[] arrayCopyFour = Arrays.copyOf(array, array.length);
+    int[] arrayCopy1 = Arrays.copyOf(array, array.length);
+    int[] arrayCopy2 = Arrays.copyOf(array, array.length);
+    int[] arrayCopy3 = Arrays.copyOf(array, array.length);
+    int[] arrayCopy4 = Arrays.copyOf(array, array.length);
+    int[] arrayCopy5 = Arrays.copyOf(array, array.length);
 
-    System.out.println("Generated array: " + Arrays.toString(array));
+    System.out.println("Generated array: " + System.identityHashCode(array));
     System.out.println(ArrayUtils.getArrayString(array));
 
     //1. Use Bubble Sort
-    System.out.println("1. Unsorted array: " + Arrays.toString(arrayCopyOne));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyOne));
+    System.out.println();
+    System.out.println("1. Unsorted array: " + System.identityHashCode(arrayCopy1));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy1));
 
-    ImprovedBubbleSort.sort(arrayCopyOne);
+    ImprovedBubbleSort.sort(arrayCopy1);
 
-    System.out.println("1. Sorted array with Bubble Sort: " + Arrays.toString(arrayCopyOne));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyOne));
+    System.out.println("1. Sorted array with Bubble Sort: " + System.identityHashCode(arrayCopy1));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy1));
 
     // 2. Use Insertion Sort
-    System.out.println("2. Unsorted array: " + Arrays.toString(arrayCopyTwo));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyTwo));
+    System.out.println();
+    System.out.println("2. Unsorted array: " + System.identityHashCode(arrayCopy2));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy2));
 
-    InsertionSort.sort(arrayCopyTwo);
+    InsertionSort.sort(arrayCopy2);
 
-    System.out.println("2. Sorted array with Insertion Sort: " + Arrays.toString(arrayCopyTwo));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyTwo));
+    System.out.println("2. Sorted array with Insertion Sort: " + System.identityHashCode(arrayCopy2));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy2));
 
     // 3. Use Selection Sort
-    System.out.println("3. Unsorted array: " + Arrays.toString(arrayCopyThree));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyThree));
+    System.out.println();
+    System.out.println("3. Unsorted array: " + System.identityHashCode(arrayCopy3));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy3));
 
-    SelectionSort.sort(arrayCopyThree);
+    SelectionSort.sort(arrayCopy3);
 
-    System.out.println("3. Sorted array with Selection Sort: " + Arrays.toString(arrayCopyThree));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyThree));
+    System.out.println("3. Sorted array with Selection Sort: " + System.identityHashCode(arrayCopy3));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy3));
 
     // 4. Use Heap Sort
-    System.out.println("4. Unsorted array: " + Arrays.toString(arrayCopyFour));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyFour));
+    System.out.println();
+    System.out.println("4. Unsorted array: " + System.identityHashCode(arrayCopy4));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy4));
 
-    HeapSort.sort(arrayCopyFour);
+    HeapSort.sort(arrayCopy4);
 
-    System.out.println("4. Sorted array with Heap Sort: " + Arrays.toString(arrayCopyFour));
-    System.out.println(ArrayUtils.getArrayString(arrayCopyFour));
+    System.out.println("4. Sorted array with Heap Sort: " + System.identityHashCode(arrayCopy4));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy4));
+
+    // 5. Use Heap Sort
+    System.out.println();
+    System.out.println("5. Unsorted array: " + System.identityHashCode(arrayCopy5));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy5));
+
+      QuickSort.sort(arrayCopy5);
+
+    System.out.println("5. Sorted array with Quick Sort: " + System.identityHashCode(arrayCopy5));
+    System.out.println(ArrayUtils.getArrayString(arrayCopy5));
 
     // Check result
-    int arraysTheSame = Arrays.compare(arrayCopyOne, arrayCopyTwo)
-        + Arrays.compare(arrayCopyTwo, arrayCopyThree)
-        + Arrays.compare(arrayCopyThree, arrayCopyFour);
+    int arraysTheSame = Arrays.compare(arrayCopy1, arrayCopy2)
+        + Arrays.compare(arrayCopy2, arrayCopy3)
+        + Arrays.compare(arrayCopy3, arrayCopy4)
+        + Arrays.compare(arrayCopy4, arrayCopy5);
     System.out.println("Sorted arrays are the same: " + (arraysTheSame == 0 ? "YES." : "FALSE!"));
 
   }

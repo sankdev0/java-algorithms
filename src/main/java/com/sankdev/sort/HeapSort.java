@@ -1,5 +1,11 @@
 package com.sankdev.sort;
 
+/**
+ * Idea: Use the heap property (item removed off the top of a heap has the largest value) to sort an
+ * array. First, make the array into a heap, then repeatedly pop items from the root of the heap to
+ * the end of the array. So the heap shrinks and the sorted part of the array grows. Good: O(N*logN)
+ * time efficiency and O(N) space efficiency.
+ */
 public class HeapSort {
 
   /**
@@ -30,6 +36,7 @@ public class HeapSort {
 
   /**
    * Remove top item of a heap with count items and restore its heap property.
+   *
    * @param array - the heap
    * @param count - the heap size.
    * @return the removed top item of the heap array.
@@ -44,7 +51,7 @@ public class HeapSort {
 
     // Restore the heap property down the tree.
     int index = 0;
-    for( ; ; ) {
+    for (; ; ) {
       // Get child items.
       int child1 = 2 * index + 1;
       int child2 = 2 * index + 2;
@@ -85,6 +92,7 @@ public class HeapSort {
 
   /**
    * Use Heap Sort to sort the array. O(N*logN) time efficiency.
+   *
    * @param array - the array to sort.
    */
   public static void sort(int[] array) {
