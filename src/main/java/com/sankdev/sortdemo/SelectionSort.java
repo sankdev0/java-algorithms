@@ -9,10 +9,10 @@ public class SelectionSort {
 
   public static void sort(int[] array) {
 
-    for(int i = 0; i < array.length; i++) {
+    for (int i = 0; i < array.length; i++) {
       int min = array[i];
       int minIndex = i;
-      for(int j = i; j < array.length; j++) {
+      for (int j = i; j < array.length; j++) {
         if (array[j] < min) {
           min = array[j];
           minIndex = j;

@@ -1,6 +1,7 @@
 package com.sankdev.sortdemo;
 
-import com.sankdev.sortImpl.InsertionSortRecursive;
+import com.sankdev.sortImpl.BubbleSortServiceImprovedImpl;
+import com.sankdev.sortImpl.InsertionSortServiceRecursiveImpl;
 import com.sankdev.util.ArrayUtils;
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ public class SortDemo {
     System.out.println("1. Unsorted array: " + System.identityHashCode(arrayCopy1));
     System.out.println(ArrayUtils.getArrayString(arrayCopy1));
 
-    ImprovedBubbleSort.sort(arrayCopy1);
+    new BubbleSortServiceImprovedImpl().sort(arrayCopy1);
 
     System.out.println("1. Sorted array with Bubble Sort: " + System.identityHashCode(arrayCopy1));
     System.out.println(ArrayUtils.getArrayString(arrayCopy1));
@@ -34,9 +35,10 @@ public class SortDemo {
     System.out.println("2. Unsorted array: " + System.identityHashCode(arrayCopy2));
     System.out.println(ArrayUtils.getArrayString(arrayCopy2));
 
-    new InsertionSortRecursive().sort(arrayCopy2);
+    new InsertionSortServiceRecursiveImpl().sort(arrayCopy2);
 
-    System.out.println("2. Sorted array with Insertion Sort: " + System.identityHashCode(arrayCopy2));
+    System.out.println(
+        "2. Sorted array with Insertion Sort: " + System.identityHashCode(arrayCopy2));
     System.out.println(ArrayUtils.getArrayString(arrayCopy2));
 
     // 3. Use Selection Sort
@@ -46,7 +48,8 @@ public class SortDemo {
 
     SelectionSort.sort(arrayCopy3);
 
-    System.out.println("3. Sorted array with Selection Sort: " + System.identityHashCode(arrayCopy3));
+    System.out.println(
+        "3. Sorted array with Selection Sort: " + System.identityHashCode(arrayCopy3));
     System.out.println(ArrayUtils.getArrayString(arrayCopy3));
 
     // 4. Use Heap Sort

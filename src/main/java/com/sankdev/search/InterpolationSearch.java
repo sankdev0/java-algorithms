@@ -6,8 +6,8 @@ package com.sankdev.search;
  * of 1000 elements ov values 1-100, element value 300 is possibly somewhere around index 300, or in
  * the first 1/3 region of the array.
  * <p>
- * Good: O(log(logN)), i.e. slightly more efficient than binary search on arrays with
- * distributions close to normal and a small number of identical elements.
+ * Good: O(log(logN)), i.e. slightly more efficient than binary search on arrays with distributions
+ * close to normal and a small number of identical elements.
  * <p>
  * Bad: O(N) time efficiency when data is distributed very unevenly (worst case).
  */

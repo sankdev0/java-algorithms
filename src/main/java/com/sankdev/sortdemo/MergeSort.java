@@ -51,8 +51,9 @@ public class MergeSort {
     }
 
     // Copy the values back into the values array.
-    if (end + 1 - start >= 0)
+    if (end + 1 - start >= 0) {
       System.arraycopy(scratch, start, array, start, end + 1 - start);
+    }
   }
 
 }

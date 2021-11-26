@@ -1,44 +1,41 @@
 package com.sankdev.datastructures;
 
 class BSTImpl {
-  //node class that defines BST node
-  class Node {
-    int key;
-    Node left, right;
 
-    public Node(int data){
-      key = data;
-      left = right = null;
-    }
-  }
   // BST root node
   Node root;
 
   // Constructor for BST =>initial empty tree
-  BSTImpl(){
+  BSTImpl() {
     root = null;
   }
+
   //delete a node from BST
   void deleteKey(int key) {
     root = delete_Recursive(root, key);
   }
 
   //recursive delete function
-  Node delete_Recursive(Node root, int key)  {
+  Node delete_Recursive(Node root, int key) {
     //tree is empty
-    if (root == null)  return null;
+    if (root == null) {
+      return null;
+    }
 
     //traverse the tree
     if (key < root.key)     //traverse left subtree
+    {
       root.left = delete_Recursive(root.left, key);
-    else if (key > root.key)  //traverse right subtree
+    } else if (key > root.key)  //traverse right subtree
+    {
       root.right = delete_Recursive(root.right, key);
-    else  {
+    } else {
       // node contains only one child
-      if (root.left == null)
+      if (root.left == null) {
         return root.right;
-      else if (root.right == null)
+      } else if (root.right == null) {
         return root.left;
+      }
 
       // node has two children;
       //get inorder successor (min value in the right subtree)
@@ -50,11 +47,11 @@ class BSTImpl {
     return root;
   }
 
-  int minValue(Node root)  {
+  int minValue(Node root) {
     //initially minval = root
     int minval = root.key;
     //find minval
-    while (root.left != null)  {
+    while (root.left != null) {
       minval = root.left.key;
       root = root.left;
     }
@@ -62,7 +59,7 @@ class BSTImpl {
   }
 
   // insert a node in BST
-  void insert(int key)  {
+  void insert(int key) {
     root = insert_Recursive(root, key);
   }
 
@@ -75,9 +72,12 @@ class BSTImpl {
     }
     //traverse the tree
     if (key < root.key)     //insert in the left subtree
+    {
       root.left = insert_Recursive(root.left, key);
-    else if (key > root.key)    //insert in the right subtree
+    } else if (key > root.key)    //insert in the right subtree
+    {
       root.right = insert_Recursive(root.right, key);
+    }
     // return pointer
     return root;
   }
@@ -96,30 +96,34 @@ class BSTImpl {
     }
   }
 
-  boolean search(int key)  {
+  boolean search(int key) {
     root = search_Recursive(root, key);
-    if (root!= null)
+    if (root != null) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   //recursive insert function
-  Node search_Recursive(Node root, int key)  {
+  Node search_Recursive(Node root, int key) {
     // Base Cases: root is null or key is present at root
-    if (root==null || root.key==key)
+    if (root == null || root.key == key) {
       return root;
+    }
     // val is greater than root's key
-    if (root.key > key)
+    if (root.key > key) {
       return search_Recursive(root.left, key);
+    }
     // val is less than root's key
     return search_Recursive(root.right, key);
   }
 
   //PostOrder Traversal - Left:Right:rootNode (LRn)
-  void postOrder(Node node)  {
-    if (node == null)
+  void postOrder(Node node) {
+    if (node == null) {
       return;
+    }
 
     // first traverse left subtree recursively
     postOrder(node.left);
@@ -130,10 +134,12 @@ class BSTImpl {
     // now process root node
     System.out.print(node.key + " ");
   }
+
   // InOrder Traversal - Left:rootNode:Right (LnR)
-  void inOrder(Node node)  {
-    if (node == null)
+  void inOrder(Node node) {
+    if (node == null) {
       return;
+    }
     //first traverse left subtree recursively
     inOrder(node.left);
 
@@ -145,9 +151,10 @@ class BSTImpl {
   }
 
   //PreOrder Traversal - rootNode:Left:Right (nLR)
-  void preOrder(Node node)  {
-    if (node == null)
+  void preOrder(Node node) {
+    if (node == null) {
       return;
+    }
 
     //first print root node first
     System.out.print(node.key + " ");
@@ -156,16 +163,36 @@ class BSTImpl {
     // next traverse right subtree recursively
     preOrder(node.right);
   }
+
   // Wrappers for recursive functions
-  void postOrder_traversal()  {
-    postOrder(root);  }
+  void postOrder_traversal() {
+    postOrder(root);
+  }
+
   void inOrder_traversal() {
-    inOrder(root);   }
+    inOrder(root);
+  }
+
   void preOrder_traversal() {
-    preOrder(root);  }
+    preOrder(root);
+  }
+
+  //node class that defines BST node
+  class Node {
+
+    int key;
+    Node left, right;
+
+    public Node(int data) {
+      key = data;
+      left = right = null;
+    }
+  }
 }
-class Main{
-  public static void main(String[] args)  {
+
+class Main {
+
+  public static void main(String[] args) {
     //create a BST object
     BSTImpl bst = new BSTImpl();
         /* BST tree example
@@ -199,10 +226,10 @@ class Main{
     bst.deleteKey(45);
     bst.inorder();
     //search a key in the BST
-    boolean ret_val = bst.search (50);
-    System.out.println("\nKey 50 found in BST:" + ret_val );
-    ret_val = bst.search (12);
-    System.out.println("\nKey 12 found in BST:" + ret_val );
+    boolean ret_val = bst.search(50);
+    System.out.println("\nKey 50 found in BST:" + ret_val);
+    ret_val = bst.search(12);
+    System.out.println("\nKey 12 found in BST:" + ret_val);
     System.out.println();
     //PreOrder Traversal
     System.out.println("BST => PreOrder Traversal:");

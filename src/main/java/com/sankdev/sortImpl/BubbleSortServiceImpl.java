@@ -13,7 +13,7 @@ public class BubbleSortServiceImpl implements SortService {
   @Override
   public void sort(int[] input) {
     for (int i = 0; i < input.length - 1; i++) {
-      for (int j = i + 1; j < input.length - 1; j++) {
+      for (int j = i + 1; j < input.length; j++) {
         if (input[i] > input[j]) {
           int temp = input[j];
           input[j] = input[i];

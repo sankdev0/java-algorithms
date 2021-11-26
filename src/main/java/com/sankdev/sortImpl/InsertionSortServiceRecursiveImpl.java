@@ -2,7 +2,7 @@ package com.sankdev.sortImpl;
 
 import com.sankdev.sort.SortService;
 
-public class InsertionSortRecursive implements SortService {
+public class InsertionSortServiceRecursiveImpl implements SortService {
 
   // the recursive function
   private void recursiveSort(int[] input, int i) {
