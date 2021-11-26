@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 public class MergeSort {
 

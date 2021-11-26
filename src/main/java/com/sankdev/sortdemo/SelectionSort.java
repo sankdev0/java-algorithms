@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 /**
  * Idea: pick the minimum element in the input list, then put it into the beginning of the sorted

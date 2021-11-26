@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 import com.sankdev.util.ArrayUtils;
 

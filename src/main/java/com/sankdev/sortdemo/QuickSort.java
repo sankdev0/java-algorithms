@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 /**
  * Idea: break the array into two parts with a dividing item. Group items less than the dividing

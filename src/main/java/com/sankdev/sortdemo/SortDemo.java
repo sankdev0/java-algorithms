@@ -1,5 +1,6 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
+import com.sankdev.sortImpl.InsertionSortRecursive;
 import com.sankdev.util.ArrayUtils;
 import java.util.Arrays;
 
@@ -33,7 +34,7 @@ public class SortDemo {
     System.out.println("2. Unsorted array: " + System.identityHashCode(arrayCopy2));
     System.out.println(ArrayUtils.getArrayString(arrayCopy2));
 
-    InsertionSort.sort(arrayCopy2);
+    new InsertionSortRecursive().sort(arrayCopy2);
 
     System.out.println("2. Sorted array with Insertion Sort: " + System.identityHashCode(arrayCopy2));
     System.out.println(ArrayUtils.getArrayString(arrayCopy2));

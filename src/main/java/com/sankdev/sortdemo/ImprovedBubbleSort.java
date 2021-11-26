@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 /**
  * Improved Bubble Sort algorithm. First, do both downward and upward passes. Second, record the

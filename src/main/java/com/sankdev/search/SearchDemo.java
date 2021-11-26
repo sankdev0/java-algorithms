@@ -1,6 +1,6 @@
 package com.sankdev.search;
 
-import com.sankdev.sort.ClassicBubbleSort;
+import com.sankdev.sortdemo.ClassicBubbleSort;
 import com.sankdev.util.ArrayUtils;
 
 public class SearchDemo {

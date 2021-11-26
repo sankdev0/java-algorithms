@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 /**
  * Idea: Use the heap property (item removed off the top of a heap has the largest value) to sort an

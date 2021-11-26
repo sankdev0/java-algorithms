@@ -1,4 +1,4 @@
-package com.sankdev.sort;
+package com.sankdev.sortdemo;
 
 /**
  * Idea: imply that the array is not sorted, so any two adjacent elements might require swapping. It
