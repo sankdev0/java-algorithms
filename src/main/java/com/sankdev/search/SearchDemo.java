@@ -1,6 +1,6 @@
 package com.sankdev.search;
 
-import com.sankdev.sortdemo.ClassicBubbleSort;
+import com.sankdev.sortdemo.ImprovedBubbleSort;
 import com.sankdev.util.ArrayUtils;
 
 public class SearchDemo {
@@ -17,14 +17,14 @@ public class SearchDemo {
 
     // 1. Use Linear Search.
 
-    int targetIndex = -1;
+    int targetIndex;
     targetIndex = LinearSearch.search(array, target);
     System.out.println("1. Linear search result: target " + target + " "
         + (targetIndex != -1 ? "found at index " + targetIndex + "." : "not found."));
 
     // 2. Use Binary Search, but array MUST be sorted.
 
-    ClassicBubbleSort.sort(array); // (!) this mutates the array.
+    ImprovedBubbleSort.sort(array); // (!) this mutates the array.
 
     System.out.println("Sorted array: ");
     System.out.println(ArrayUtils.getArrayString(array));

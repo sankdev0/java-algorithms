@@ -1,4 +1,6 @@
-package com.sankdev.sortdemo;
+package com.sankdev.sortImpl;
+
+import com.sankdev.sort.SortService;
 
 /**
  * Idea: imply that the array is not sorted, so any two adjacent elements might require swapping. It
@@ -6,16 +8,16 @@ package com.sankdev.sortdemo;
  * and down; 2. move elements several positions, not just one; 3. stop once get to the position of
  * the last swap. For improved implementation see another example.
  */
-public class ClassicBubbleSort {
+public class BubbleSortServiceImpl implements SortService {
 
-  public static void sort(int[] array) {
-
-    for (int i = 0; i < array.length - 1; i++) {
-      for (int j = 0; j < array.length - 1; j++) {
-        if (array[j] > array[j + 1]) {
-          int temp = array[j + 1];
-          array[j + 1] = array[j];
-          array[j] = temp;
+  @Override
+  public void sort(int[] input) {
+    for (int i = 0; i < input.length - 1; i++) {
+      for (int j = i + 1; j < input.length - 1; j++) {
+        if (input[i] > input[j]) {
+          int temp = input[j];
+          input[j] = input[i];
+          input[i] = temp;
         }
       }
     }
