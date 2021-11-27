@@ -2,6 +2,7 @@ package com.sankdev.sortdemo;
 
 import com.sankdev.sortImpl.BubbleSortServiceImprovedImpl;
 import com.sankdev.sortImpl.InsertionSortServiceRecursiveImpl;
+import com.sankdev.sortImpl.SelectionSortServiceImpl;
 import com.sankdev.util.ArrayUtils;
 import java.util.Arrays;
 
@@ -46,7 +47,7 @@ public class SortDemo {
     System.out.println("3. Unsorted array: " + System.identityHashCode(arrayCopy3));
     System.out.println(ArrayUtils.getArrayString(arrayCopy3));
 
-    SelectionSort.sort(arrayCopy3);
+    new SelectionSortServiceImpl().sort(arrayCopy3);
 
     System.out.println(
         "3. Sorted array with Selection Sort: " + System.identityHashCode(arrayCopy3));
