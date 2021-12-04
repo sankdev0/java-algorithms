@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents a collection of elements that support operations: add(x) and remove().

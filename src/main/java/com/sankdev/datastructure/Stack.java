@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents a queue with LIFO queueing discipline. e.g.: a stack of plates.

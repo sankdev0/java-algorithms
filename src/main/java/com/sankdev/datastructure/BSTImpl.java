@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 class BSTImpl {
 

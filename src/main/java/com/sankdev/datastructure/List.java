@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents a sequence of elements. This one is VERY important.

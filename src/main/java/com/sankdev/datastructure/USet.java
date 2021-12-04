@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents an unordered set of unique elements, which mimics a mathematical set.

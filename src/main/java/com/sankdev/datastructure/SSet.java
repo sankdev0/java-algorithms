@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents a sorted list of elements so that any two elements x and y can be compared.

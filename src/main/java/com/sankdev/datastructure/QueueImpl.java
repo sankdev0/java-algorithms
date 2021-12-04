@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 // TODO: Improve this implementation.
 public class QueueImpl {

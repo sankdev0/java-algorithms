@@ -1,4 +1,4 @@
-package com.sankdev.datastructures;
+package com.sankdev.datastructure;
 
 /**
  * ADT that represents a sequence of elements with  a front and a back (i.e. double-ended queue).<br>
