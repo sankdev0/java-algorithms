@@ -30,7 +30,7 @@ public class SampleTextFileGenerator {
       } else if (i != 0 && (i % 15 == 0 || i % 101 == 0)) {
         stubLine = prevStubLine;
       } else {
-        stubLine = i + ". This is a test line for a test file. Makes no sense. \n";
+        stubLine = i + ". This is a test line for a test file. Makes no sense.\n";
       }
 
       writer.write(stubLine);
@@ -44,6 +44,6 @@ public class SampleTextFileGenerator {
   public static void main(String[] args) throws IOException {
     SampleTextFileGenerator generator = new SampleTextFileGenerator();
     generator.createSampleTextFile(
-        System.getProperty("java.io.tmpdir") + "test-file.txt", 2_000);
+        System.getProperty("java.io.tmpdir") + "test-file.txt", 300);
   }
 }
