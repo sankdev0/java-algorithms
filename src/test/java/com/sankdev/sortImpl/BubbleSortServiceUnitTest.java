@@ -1,8 +1,8 @@
 package com.sankdev.sortImpl;
 
 import com.sankdev.sort.SortService;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class BubbleSortServiceUnitTest {
 
@@ -12,7 +12,7 @@ public class BubbleSortServiceUnitTest {
     SortService sortService = new BubbleSortServiceImpl();
     sortService.sort(input);
     int[] expected = {1, 2, 2, 3, 4, 5, 6, 7};
-    Assert.assertArrayEquals("The two arrays are not equal", expected, input);
+    Assertions.assertArrayEquals(expected, input, "The two arrays are not equal");
   }
 
 }
