@@ -21,7 +21,7 @@ public class FileProcessorWithCollectionsUnitTest {
   }
 
   @Test
-  public void providedTextFile_whenReverseLines_thenReturnFileWithReverseLineOrder()
+  public void providedTextFile_whenReverseLines_thenOutputWithAllLinesInReverseOrder()
       throws URISyntaxException, IOException {
 
     Path test = Paths.get(thisClass.getResource("test-file-reverse.txt").toURI());
@@ -31,9 +31,28 @@ public class FileProcessorWithCollectionsUnitTest {
 
     long mismatchIdx = Files.mismatch(test, output);
 
-    output.toFile().deleteOnExit(); //cleanup
+    // output.toFile().deleteOnExit(); //cleanup
 
     Assertions.assertEquals(-1, mismatchIdx);
+  }
+
+  @Test
+  public void providedTextFile_whenReverseEachFiftyLines_thenOutputWithEachFiftyLinesInReverseOrder()
+      throws URISyntaxException, IOException {
+
+    final int linesChunk = 50;
+
+    Path test = Paths.get(thisClass.getResource("test-file-reverse-each-fifty.txt").toURI());
+    Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-02", ".txt");
+
+    FileProcessorWithCollections.reverseEachNLines(input, output, linesChunk);
+
+    long mismatchIdx = Files.mismatch(test, output);
+
+    output.toFile().deleteOnExit();
+
+    Assertions.assertEquals(-1, mismatchIdx);
+
   }
 
 }
