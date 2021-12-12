@@ -27,7 +27,7 @@ public class FileProcessorWithCollections {
    * @param output path to the output file
    * @throws IOException if IO operations fail
    */
-  public static void reverseLines(Path input, Path output) throws IOException {
+  public static void reverseAllLines(Path input, Path output) throws IOException {
 
     Deque<String> lineStack = new ArrayDeque<>();
 

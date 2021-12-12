@@ -27,11 +27,11 @@ public class FileProcessorWithCollectionsUnitTest {
     Path test = Paths.get(thisClass.getResource("test-file-reverse.txt").toURI());
     Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-01", ".txt");
 
-    FileProcessorWithCollections.reverseLines(input, output);
+    FileProcessorWithCollections.reverseAllLines(input, output);
 
     long mismatchIdx = Files.mismatch(test, output);
 
-    // output.toFile().deleteOnExit(); //cleanup
+    output.toFile().deleteOnExit();
 
     Assertions.assertEquals(-1, mismatchIdx);
   }
