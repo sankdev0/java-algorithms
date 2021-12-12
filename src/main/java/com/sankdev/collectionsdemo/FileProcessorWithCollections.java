@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * This class shows use cases of Java Collections Framework for processing a text file line by line.
@@ -54,13 +55,13 @@ public class FileProcessorWithCollections {
   }
 
   /**
-   * Read the first 50 lines of input and then write them out in reverse order. Read the next 50
-   * lines and then write them out in reverse order. Do this until there are no more lines left to
-   * read, at which point any remaining lines should be output in reverse order. In other words,
-   * your output will start with the 50th line, then the 49th, then the 48th, and so on down to the
-   * first line. This will be followed by the 100th line, followed by the 99th, and so on down to
-   * the 51st line. And so on. Your code should never have to store more than 50 lines at any given
-   * time.
+   * Read the first {@code n} lines of input and then write them out in reverse order. Read the next
+   * {@code n} lines and then write them out in reverse order. Do this until there are no more lines
+   * left to read, at which point any remaining lines should be output in reverse order. In other
+   * words, your output will start with the nth line, then the (n - 1)th, then the (n - 2)th, and so
+   * on down to the first line. This will be followed by the 2nth line, followed by the (2n - 1)th,
+   * and so on down to the (n + 1)th line. And so on. Your code should never have to store more than
+   * {@code n} lines at any given time.
    *
    * @param input  path to the input file
    * @param output path to the output file
@@ -68,6 +69,10 @@ public class FileProcessorWithCollections {
    * @throws IOException if IO operations fail
    */
   public static void reverseEachNLines(Path input, Path output, int n) throws IOException {
+
+    if (n < 0) {
+      throw new IllegalArgumentException("Number of lines must not be less than zero");
+    }
 
     Deque<String> lineStack = new ArrayDeque<>();
 
@@ -101,6 +106,52 @@ public class FileProcessorWithCollections {
       while (!lineStack.isEmpty()) {
         bw.write("\n");
         bw.write(lineStack.pop());
+      }
+    }
+  }
+
+  /**
+   * Read the input one line at a time. At any point after reading the first {@code n} lines, if
+   * some line is blank (i.e., a string of length 0), then output the line that occurred {@code n}
+   * lines prior to that one. For example, if Line 242 is blank, then your program should output
+   * line (242 - n). This program should be implemented so that it never stores more than {@code n}
+   * lines of the input at any given time.
+   *
+   * @param input  path to the input file
+   * @param output path to the output file
+   * @param n      number of lines to skip
+   * @throws IOException if IO operations fail
+   */
+  public static void replaceBlankLineWithPriorNthLine(Path input, Path output, int n)
+      throws IOException {
+
+    if (n < 0) {
+      throw new IllegalArgumentException("Number of lines must not be less than zero");
+    }
+
+    Deque<String> queue = new LinkedList<>();
+
+    String line;
+
+    try (BufferedReader br = Files.newBufferedReader(input);
+        BufferedWriter bw = Files.newBufferedWriter(output)) {
+
+      boolean isFirstLine = true;
+      while ((line = br.readLine()) != null) {
+        queue.addLast(line);
+        if (queue.size() > n) {
+          if (line.isEmpty()) {
+            line = queue.peekFirst();
+          }
+          queue.removeFirst();
+        }
+
+        if (isFirstLine) {
+          isFirstLine = false;
+        } else {
+          bw.write("\n");
+        }
+        bw.write(line);
       }
     }
   }

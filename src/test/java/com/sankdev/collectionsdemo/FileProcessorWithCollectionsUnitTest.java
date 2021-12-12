@@ -55,4 +55,20 @@ public class FileProcessorWithCollectionsUnitTest {
 
   }
 
+  @Test
+  public void providedTextFile_whenReplaceBlankLinesWithPrior42ndLine_thenOutputWithBlankLinesReplaced()
+      throws URISyntaxException, IOException {
+
+    Path test = Paths.get(thisClass.getResource("test-file-replace-blank.txt").toURI());
+    Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-03", ".txt");
+
+    FileProcessorWithCollections.replaceBlankLineWithPriorNthLine(input, output, 42);
+
+    long mismatchIdx = Files.mismatch(test, output);
+
+    output.toFile().deleteOnExit();
+
+    Assertions.assertEquals(-1, mismatchIdx);
+  }
+
 }
