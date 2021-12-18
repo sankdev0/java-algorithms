@@ -5,9 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * This class shows use cases of Java Collections Framework for processing a text file line by line.
@@ -154,6 +152,37 @@ public class FileProcessorWithCollections {
                     bw.write(System.lineSeparator());
                 }
                 bw.write(line);
+            }
+        }
+    }
+
+    /**
+     * Read the input one line at a time and write each line to the output if it is not a duplicate of
+     * some previous input line. Take special care so that a file with a lot of duplicate lines does
+     * not use more memory than what is required for the number of unique lines.
+     *
+     * @param input  path to the input file
+     * @param output path to the output file
+     * @throws IOException if IO operations fail
+     */
+    public static void outputUniqueLinesOnly(Path input, Path output) throws IOException {
+
+        Set<String> lineSet = new HashSet<>();
+
+        String line;
+        try (BufferedReader br = Files.newBufferedReader(input);
+             BufferedWriter bw = Files.newBufferedWriter(output)) {
+
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (lineSet.add(line)) {
+                    if (isFirstLine) {
+                        isFirstLine = false;
+                    } else {
+                        bw.write(System.lineSeparator());
+                    }
+                    bw.write(line);
+                }
             }
         }
     }

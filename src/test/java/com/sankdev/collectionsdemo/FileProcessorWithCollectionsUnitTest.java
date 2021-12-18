@@ -44,10 +44,12 @@ public class FileProcessorWithCollectionsUnitTest {
                 "0. This is a longer test line",
                 "1. This is a short test line",
                 "2. This is a short test line",
+                "2. This is a short test line",
                 "",
                 "4. The shortest line",
                 "",
                 "",
+                "7. This is the longest test line",
                 "7. This is the longest test line",
                 "",
                 "",
@@ -66,10 +68,12 @@ public class FileProcessorWithCollectionsUnitTest {
                 "",
                 "",
                 "7. This is the longest test line",
+                "7. This is the longest test line",
                 "",
                 "",
                 "4. The shortest line",
                 "",
+                "2. This is a short test line",
                 "2. This is a short test line",
                 "1. This is a short test line",
                 "0. This is a longer test line"
@@ -94,17 +98,19 @@ public class FileProcessorWithCollectionsUnitTest {
 
         final int LINES_CHUNK = 5;
         String[] reversedLines = new String[]{
-                "4. The shortest line",
                 "",
+                "2. This is a short test line",
                 "2. This is a short test line",
                 "1. This is a short test line",
                 "0. This is a longer test line",
-                "",
-                "",
+                "7. This is the longest test line",
                 "7. This is the longest test line",
                 "",
                 "",
-                "10. Wow. Just an average line"
+                "4. The shortest line",
+                "10. Wow. Just an average line",
+                "",
+                ""
         };
 
         Path expected = writeLinesToTempTxtFile(reversedLines, thisClass.getSimpleName() + "-expected-output-02");
@@ -129,13 +135,15 @@ public class FileProcessorWithCollectionsUnitTest {
                 "0. This is a longer test line",
                 "1. This is a short test line",
                 "2. This is a short test line",
+                "2. This is a short test line",
                 "",
                 "4. The shortest line",
-                "0. This is a longer test line",
                 "1. This is a short test line",
+                "2. This is a short test line",
                 "7. This is the longest test line",
-                "",
+                "7. This is the longest test line",
                 "4. The shortest line",
+                "",
                 "10. Wow. Just an average line"
         };
 
@@ -143,6 +151,33 @@ public class FileProcessorWithCollectionsUnitTest {
         Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-03", ".txt");
 
         FileProcessorWithCollections.replaceBlankLineWithPriorNthLine(input, output, STEP);
+
+        long mismatchIdx = Files.mismatch(expected, output);
+
+        expected.toFile().deleteOnExit();
+        output.toFile().deleteOnExit();
+
+        Assertions.assertEquals(-1, mismatchIdx);
+    }
+
+    @Test
+    public void providedTextFile_whenOutputUniqueLinesOnly_thenOutputUniqueLinesOnly()
+            throws IOException {
+
+        testLines = new String[]{
+                "0. This is a longer test line",
+                "1. This is a short test line",
+                "2. This is a short test line",
+                "",
+                "4. The shortest line",
+                "7. This is the longest test line",
+                "10. Wow. Just an average line"
+        };
+
+        Path expected = writeLinesToTempTxtFile(testLines, thisClass.getSimpleName() + "-expected-output-04");
+        Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-04", ".txt");
+
+        FileProcessorWithCollections.outputUniqueLinesOnly(input, output);
 
         long mismatchIdx = Files.mismatch(expected, output);
 
