@@ -1,74 +1,160 @@
 package com.sankdev.collectionsdemo;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class FileProcessorWithCollectionsUnitTest {
 
-  public static Path input = null;
-  public static Class thisClass = null;
+    public static Path input = null;
+    public static String[] testLines;
+    public static Class thisClass = null;
 
-  @BeforeAll
-  public static void setup() throws URISyntaxException {
-    thisClass = FileProcessorWithCollectionsUnitTest.class;
-    input = Paths.get(thisClass.getResource("test-file.txt").toURI());
-  }
+    /**
+     * Helper method to create a temp text file with name including the prefix and suffix, and write the lines to it.
+     * Returns the path to the temp file. When writing it uses the {@code System.lineSeparator()}.
+     *
+     * @param lines  the lines to write to the temp file
+     * @param prefix prefix to include in file name
+     * @return path to the temp file containing the lines
+     */
+    private static Path writeLinesToTempTxtFile(String[] lines, String prefix) throws IOException {
+        Path path = Files.createTempFile(thisClass.getSimpleName() + prefix, ".txt");
 
-  @Test
-  public void providedTextFile_whenReverseLines_thenOutputWithAllLinesInReverseOrder()
-      throws URISyntaxException, IOException {
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            for (int i = 0; i < lines.length - 1; i++) {
+                bw.write(lines[i] + System.lineSeparator());
+            }
+            bw.write(lines[lines.length - 1]);
+        }
 
-    Path test = Paths.get(thisClass.getResource("test-file-reverse.txt").toURI());
-    Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-01", ".txt");
+        return path;
+    }
 
-    FileProcessorWithCollections.reverseAllLines(input, output);
+    @BeforeAll
+    public static void setup() throws IOException {
+        thisClass = FileProcessorWithCollectionsUnitTest.class;
+        testLines = new String[]{
+                "0. This is a longer test line",
+                "1. This is a short test line",
+                "2. This is a short test line",
+                "",
+                "4. The shortest line",
+                "",
+                "",
+                "7. This is the longest test line",
+                "",
+                "",
+                "10. Wow. Just an average line"
+        };
+        // Write the test file.
+        input = writeLinesToTempTxtFile(testLines, thisClass.getSimpleName() + "-test-file-");
+    }
 
-    long mismatchIdx = Files.mismatch(test, output);
+    @Test
+    public void providedTextFile_whenReverseLines_thenOutputWithAllLinesInReverseOrder()
+            throws IOException {
 
-    output.toFile().deleteOnExit();
+        String[] reversedLines = {
+                "10. Wow. Just an average line",
+                "",
+                "",
+                "7. This is the longest test line",
+                "",
+                "",
+                "4. The shortest line",
+                "",
+                "2. This is a short test line",
+                "1. This is a short test line",
+                "0. This is a longer test line"
+        };
 
-    Assertions.assertEquals(-1, mismatchIdx);
-  }
+        Path expected = writeLinesToTempTxtFile(reversedLines, thisClass.getSimpleName() + "-expected-output-01-");
+        Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-01-", ".txt");
 
-  @Test
-  public void providedTextFile_whenReverseEachFiftyLines_thenOutputWithEachFiftyLinesInReverseOrder()
-      throws URISyntaxException, IOException {
+        FileProcessorWithCollections.reverseAllLines(input, output);
 
-    final int linesChunk = 50;
+        long mismatchIdx = Files.mismatch(expected, output);
 
-    Path test = Paths.get(thisClass.getResource("test-file-reverse-each-fifty.txt").toURI());
-    Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-02", ".txt");
+        expected.toFile().deleteOnExit();
+        output.toFile().deleteOnExit();
 
-    FileProcessorWithCollections.reverseEachNLines(input, output, linesChunk);
+        Assertions.assertEquals(-1, mismatchIdx);
+    }
 
-    long mismatchIdx = Files.mismatch(test, output);
+    @Test
+    public void providedTextFile_whenReverseEachFiftyLines_thenOutputWithEachFiveLinesInReverseOrder()
+            throws IOException {
 
-    output.toFile().deleteOnExit();
+        final int LINES_CHUNK = 5;
+        String[] reversedLines = new String[]{
+                "4. The shortest line",
+                "",
+                "2. This is a short test line",
+                "1. This is a short test line",
+                "0. This is a longer test line",
+                "",
+                "",
+                "7. This is the longest test line",
+                "",
+                "",
+                "10. Wow. Just an average line"
+        };
 
-    Assertions.assertEquals(-1, mismatchIdx);
+        Path expected = writeLinesToTempTxtFile(reversedLines, thisClass.getSimpleName() + "-expected-output-02");
+        Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-02", ".txt");
 
-  }
+        FileProcessorWithCollections.reverseEachNLines(input, output, LINES_CHUNK);
 
-  @Test
-  public void providedTextFile_whenReplaceBlankLinesWithPrior42ndLine_thenOutputWithBlankLinesReplaced()
-      throws URISyntaxException, IOException {
+        long mismatchIdx = Files.mismatch(expected, output);
 
-    Path test = Paths.get(thisClass.getResource("test-file-replace-blank.txt").toURI());
-    Path output = Files.createTempFile(thisClass.getSimpleName() + "-test-file-03", ".txt");
+        expected.toFile().deleteOnExit();
+        output.toFile().deleteOnExit();
 
-    FileProcessorWithCollections.replaceBlankLineWithPriorNthLine(input, output, 42);
+        Assertions.assertEquals(-1, mismatchIdx);
+    }
 
-    long mismatchIdx = Files.mismatch(test, output);
+    @Test
+    public void providedTextFile_whenReplaceBlankLinesWithPrior42ndLine_thenOutputWithBlankLinesReplacedWIthStepFive()
+            throws IOException {
 
-    output.toFile().deleteOnExit();
+        final int STEP = 5;
+        testLines = new String[]{
+                "0. This is a longer test line",
+                "1. This is a short test line",
+                "2. This is a short test line",
+                "",
+                "4. The shortest line",
+                "0. This is a longer test line",
+                "1. This is a short test line",
+                "7. This is the longest test line",
+                "",
+                "4. The shortest line",
+                "10. Wow. Just an average line"
+        };
 
-    Assertions.assertEquals(-1, mismatchIdx);
-  }
+        Path expected = writeLinesToTempTxtFile(testLines, thisClass.getSimpleName() + "-expected-output-03");
+        Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-03", ".txt");
 
+        FileProcessorWithCollections.replaceBlankLineWithPriorNthLine(input, output, STEP);
+
+        long mismatchIdx = Files.mismatch(expected, output);
+
+        expected.toFile().deleteOnExit();
+        output.toFile().deleteOnExit();
+
+        Assertions.assertEquals(-1, mismatchIdx);
+    }
+
+    // Do a cleanup
+    @AfterAll
+    public static void cleanup() {
+        input.toFile().deleteOnExit();
+    }
 }
