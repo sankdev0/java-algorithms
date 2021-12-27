@@ -9,6 +9,6 @@ package com.sankdev.datastructure;
  * <br> removeLast();
  * <br> Note: Can be used to implement Stack or FIFO Queue.
  */
-public interface Dequeue {
+public interface Deque {
 
 }

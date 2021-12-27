@@ -187,6 +187,32 @@ public class FileProcessorWithCollectionsUnitTest {
         Assertions.assertEquals(-1, mismatchIdx);
     }
 
+    @Test
+    public void providedTextFile_whenRemoveFirstOccurrences_thenFirstOccurrencesRemoved()
+            throws IOException {
+
+        testLines = new String[]{
+                "2. This is a short test line",
+                "",
+                "",
+                "7. This is the longest test line",
+                "",
+                ""
+        };
+
+        Path expected = writeLinesToTempTxtFile(testLines, thisClass.getSimpleName() + "-expected-output-05");
+        Path output = Files.createTempFile(thisClass.getSimpleName() + "-output-05", ".txt");
+
+        FileProcessorWithCollections.removeFirstOccurrences(input, output);
+
+        long mismatchIdx = Files.mismatch(expected, output);
+
+        expected.toFile().deleteOnExit();
+        output.toFile().deleteOnExit();
+
+        Assertions.assertEquals(-1, mismatchIdx);
+    }
+
     // Do a cleanup
     @AfterAll
     public static void cleanup() {

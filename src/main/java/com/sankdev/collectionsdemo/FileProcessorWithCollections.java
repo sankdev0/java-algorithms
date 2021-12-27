@@ -187,4 +187,37 @@ public class FileProcessorWithCollections {
         }
     }
 
+    /**
+     * Read the input one line at a time and write each line to the output
+     * only if you have already read this line before. (The end result is that
+     * you remove the first occurrence of each line.) Take special care so
+     * that a file with a lot of duplicate lines does not use more memory
+     * than what is required for the number of unique lines.
+     *
+     * @param input  path to the input file
+     * @param output path to the output file
+     * @throws IOException if IO operations fail
+     */
+    public static void removeFirstOccurrences(Path input, Path output) throws IOException {
+
+        Set<String> lineSet = new HashSet<>();
+
+        String line;
+        try (BufferedReader br = Files.newBufferedReader(input);
+             BufferedWriter bw = Files.newBufferedWriter(output)) {
+
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (!lineSet.add(line)) {
+                    if (isFirstLine) {
+                        isFirstLine = false;
+                    } else {
+                        bw.write(System.lineSeparator());
+                    }
+                    bw.write(line);
+                }
+            }
+        }
+    }
+
 }
